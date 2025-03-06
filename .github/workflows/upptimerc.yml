@@ -1,1 +1,29 @@
+name: Upptime Uptime Check
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # Runs every hour (adjust this to your needs)
+  push:
+    branches:
+      - main  # Optionally run on pushes to the 'main' branch
+  workflow_dispatch:  # Manually trigger the workflow if needed
+
+jobs:
+  uptime-check:
+    runs-on: ubuntu-latest  # Runs the job on Ubuntu
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2  # Checkout the code from your repository
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2  # Setup Node.js environment
+        with:
+          node-version: '14'  # Specify the Node.js version
+
+      - name: Install dependencies
+        run: npm install  # Install dependencies (you’ll need to add `uptime.js` script and package.json)
+
+      - name: Run uptime check
+        run: node uptime.js  # Run the uptime.js script
 
